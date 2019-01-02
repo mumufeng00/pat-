@@ -1,0 +1,37 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+long int aplusb(long int a, long int b);
+int main(){
+  long int num1 = 0;
+  long int num2 = 0;
+  stack <int>stk;
+  cin >> num1;
+  cin >> num2;
+  num1 = num1+num2;
+  if (num1<0)             
+  {
+    cout << "-";
+    num1 = abs(num1);
+  }
+  else if (num1 == 0) { //检查0解这里这一步很重要，价值1分
+    cout << "0";
+    return 0;
+  }
+/*用栈来实现逗号添加，栈中剩下数的位数为3的整数倍时添加逗号，位数为0不添加*/
+  while (num1>0) {  
+    stk.push(num1 % 10);
+    num1 = num1 / 10;
+  }
+  while (!stk.empty())
+  {
+    cout << stk.top();
+    stk.pop();   
+    if (stk.size()%3==0 && stk.size()!=0)
+    {
+      cout << ",";
+    }
+  }
+  
+  return 0;
+}
